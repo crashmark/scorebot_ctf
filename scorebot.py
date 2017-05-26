@@ -19,6 +19,7 @@ import ropeman
 import blackgold
 import sharing
 import hanoifones
+import FHMMaintenance
 
 # End-import-Services
 
@@ -34,7 +35,7 @@ class Game:
 				if tmp_flag == service.flags[team.name]:
 					print 'Defense point! +1 for %s - %s' % (team_name, service_name)
 					team.updateDefScore()
-					
+
 	def setFlags(self):
 		for service_name, service in services.iteritems():
 			for team_name, team in teams.iteritems():
@@ -42,8 +43,8 @@ class Game:
 
 	def getFlagID(self, service_name, evil_team):
 		return self.services[service_name].args[evil_team].get('flag_id')
-		
-	
+
+
 	def submitFlags(self, team_name, service_name, flag):
 		teamx = self.teams[team_name]
 		dic_flags = self.services[service_name].flags
@@ -83,7 +84,7 @@ class Service:
    	  flag = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(20))
    	  self.args[team_name] = self.module.set_flag(host, self.port, flag)
    	  self.flags[team_name] = flag
- 
+
    def getFlag(self, host, team_name):
    	  flag_id = self.args[team_name]["flag_id"]
    	  token = self.args[team_name]["token"]
@@ -119,27 +120,28 @@ def getFlagID():
 	return str(flagid)
 
 if __name__ == '__main__':
-	
+
 	'''
 	teams = {'CuredPin': Team('CuredPin', "192.168.0.13"),
 			 'LiquidPad': Team('LiquidPad', "192.168.0.13")}
-	
-	services = {'tweety_bird': Service('tweety_bird', '20118', tweetybird), 
-				'textfilestore': Service('textfilestore', '20093', textfilestore), 
+
+	services = {'tweety_bird': Service('tweety_bird', '20118', tweetybird),
+				'textfilestore': Service('textfilestore', '20093', textfilestore),
 				'nadmozg': Service('nadmozg', '20067', nadmozg),
-				'piratemap': Service('piratemap', '20038', piratemap), 
+				'piratemap': Service('piratemap', '20038', piratemap),
+				'FHMMaintenance': Service('FHMMaintenance', '20111', FHMMaintenance)
 				'redmessanger': Service('redmessanger', '20064', redmessanger),
 				'ropeman': Service('ropeman', '20129', ropeman),
 				'blackgold': Service('blackgold', '20066', blackgold),
-				'sharing': Service('sharing', '20065', sharing},
-				'hanoifones': Service('hanoifones', '20040', hanoifones)
-				
+				'sharing': Service('sharing', '20065', sharing),
+				'hanoifones': Service('hanoifones', '20040', hanoifones)}
+
 	'''
 
 	teams = {'testTeam': Team('testTeam', "192.168.0.13")}
+
 	services = {'sharing': Service('sharing', '20065', sharing)}
-	
+
 	game = Game(teams, services)
 	routine()
 	app.run()
-
