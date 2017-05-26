@@ -16,6 +16,7 @@ import nadmozg
 import piratemap
 import redmessanger
 import ropeman
+import blackgold
 
 # End-import-Services
 
@@ -116,6 +117,8 @@ def getFlagID():
 	return str(flagid)
 
 if __name__ == '__main__':
+	
+	'''
 	teams = {'CuredPin': Team('CuredPin', "192.168.0.13"),
 			 'LiquidPad': Team('LiquidPad', "192.168.0.13")}
 	
@@ -124,7 +127,12 @@ if __name__ == '__main__':
 				'nadmozg': Service('nadmozg', '20067', nadmozg),
 				'piratemap': Service('piratemap', '20038', piratemap), 
 				'redmessanger': Service('redmessanger', '20064', redmessanger),
-				'ropeman': Service('ropeman', '20129', ropeman)}
+				'ropeman': Service('ropeman', '20129', ropeman),
+				'blackgold': Service('blackgold', '20066', blackgold)}
+	'''
+
+	teams = {'testTeam': Team('testTeam', "192.168.0.13")}
+	services = {'blackgold': Service('blackgold', '20066', blackgold)}
 	
 	game = Game(teams, services)
 	routine()
