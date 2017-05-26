@@ -7,13 +7,19 @@ from flask import request
 
 app = Flask(__name__)
 
-#start-import-services
+# Start-import-Services
 sys.path.insert(0, './services/')
 
 import textfilestore
 import tweetybird
 import nadmozg
-#end-import-services
+import piratemap
+import redmessanger
+import ropeman
+import blackgold
+import sharing
+
+# End-import-Services
 
 class Game:
 	def __init__(self, teams, services):
@@ -25,7 +31,7 @@ class Game:
 			for team_name, team in teams.iteritems():
 				tmp_flag = service.getFlag(team.host, team_name)
 				if tmp_flag == service.flags[team.name]:
-					print '+1 for %s - %s' % (team_name, service_name)
+					print 'Defense point! +1 for %s - %s' % (team_name, service_name)
 					team.updateDefScore()
 					
 	def setFlags(self):
@@ -42,11 +48,11 @@ class Game:
 		dic_flags = self.services[service_name].flags
 		for user, user_flag in dic_flags.iteritems():
 			if flag == user_flag: #and user != teamx.name:
-				print '+2 for ' + team_name
+				print 'Attack point! +2 for ' + team_name
 				teamx.updateAttScore()
 				self.services[service_name].flags[user] = ""
-				return "valid"
-		return "invalid"
+				return "Flag valid!"
+		return "Flag invalid!"
 
 class Team:
 	def __init__(self, name, host):
@@ -81,7 +87,7 @@ class Service:
    	  flag_id = self.args[team_name]["flag_id"]
    	  token = self.args[team_name]["token"]
    	  flag = self.module.get_flag(host, self.port, flag_id, token)
-	  print 'retrieved flag %s' % (flag)
+	  print 'Retrieved flag: %s' % (flag)
 	  return flag
 
 def routine():
@@ -96,7 +102,7 @@ def hello():
 		res += "Name: {0}</br>Def Pnt: {1}</br>Att Pnt: {2}</br></br>".format(team_name, team.def_score, team.att_score)
 	return res
 
-@app.route('/submit/', methods=['POST'])
+@app.route('/submit', methods=['POST'])
 def submitFlag():
 	flag = request.form.get('flag', None)
 	team_name = request.form.get('team', None)
@@ -112,8 +118,24 @@ def getFlagID():
 	return str(flagid)
 
 if __name__ == '__main__':
-	teams = {'fried': Team('fried', "192.168.56.102") }
-	services = {'tweety_bird': Service('tweety_bird', '20118', tweetybird), 'textfilestore': Service('textfilestore', '20093', textfilestore), 'nadmozg': Service('nadmozg', '20067', nadmozg)}
+	
+	'''
+	teams = {'CuredPin': Team('CuredPin', "192.168.0.13"),
+			 'LiquidPad': Team('LiquidPad', "192.168.0.13")}
+	
+	services = {'tweety_bird': Service('tweety_bird', '20118', tweetybird), 
+				'textfilestore': Service('textfilestore', '20093', textfilestore), 
+				'nadmozg': Service('nadmozg', '20067', nadmozg),
+				'piratemap': Service('piratemap', '20038', piratemap), 
+				'redmessanger': Service('redmessanger', '20064', redmessanger),
+				'ropeman': Service('ropeman', '20129', ropeman),
+				'blackgold': Service('blackgold', '20066', blackgold),
+				'sharing': Service('sharing', '20065', sharing}
+	'''
+
+	teams = {'testTeam': Team('testTeam', "192.168.0.13")}
+	services = {'sharing': Service('sharing', '20065', sharing)}
+	
 	game = Game(teams, services)
 	routine()
 	app.run()
