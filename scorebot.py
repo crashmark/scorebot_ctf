@@ -14,6 +14,7 @@ import textfilestore
 import tweetybird
 import nadmozg
 import piratemap
+import redmessanger
 #end-import-services
 
 class Game:
@@ -114,7 +115,7 @@ def getFlagID():
 
 if __name__ == '__main__':
 	teams = {'fried': Team('fried', "192.168.56.102") }
-	services = {'tweety_bird': Service('tweety_bird', '20118', tweetybird), 'textfilestore': Service('textfilestore', '20093', textfilestore), 'nadmozg': Service('nadmozg', '20067', nadmozg),'piratemap': Service('piratemap', '20038', piratemap)}
+	services = {'tweety_bird': Service('tweety_bird', '20118', tweetybird), 'textfilestore': Service('textfilestore', '20093', textfilestore), 'nadmozg': Service('nadmozg', '20067', nadmozg),'piratemap': Service('piratemap', '20038', piratemap), 'redmessanger': Service('redmessanger', '20064', redmessanger)}
 	game = Game(teams, services)
 	routine()
 	app.run()
