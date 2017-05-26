@@ -17,6 +17,7 @@ import piratemap
 import redmessanger
 import ropeman
 import blackgold
+import sharing
 
 # End-import-Services
 
@@ -132,7 +133,7 @@ if __name__ == '__main__':
 	'''
 
 	teams = {'testTeam': Team('testTeam', "192.168.0.13")}
-	services = {'blackgold': Service('blackgold', '20066', blackgold)}
+	services = {'sharing': Service('sharing', '20065', sharing)}
 	
 	game = Game(teams, services)
 	routine()
