@@ -129,7 +129,8 @@ if __name__ == '__main__':
 				'piratemap': Service('piratemap', '20038', piratemap), 
 				'redmessanger': Service('redmessanger', '20064', redmessanger),
 				'ropeman': Service('ropeman', '20129', ropeman),
-				'blackgold': Service('blackgold', '20066', blackgold)}
+				'blackgold': Service('blackgold', '20066', blackgold),
+				'sharing': Service('sharing', '20065', sharing}
 	'''
 
 	teams = {'testTeam': Team('testTeam', "192.168.0.13")}
