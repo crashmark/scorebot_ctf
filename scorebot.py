@@ -134,7 +134,8 @@ if __name__ == '__main__':
 				'ropeman': Service('ropeman', '20129', ropeman),
 				'blackgold': Service('blackgold', '20066', blackgold),
 				'sharing': Service('sharing', '20065', sharing),
-				'hanoifones': Service('hanoifones', '20040', hanoifones)}
+				'hanoifones': Service('hanoifones', '20040', hanoifones)},
+				'FHMMaintenance': Service('FHMMaintenance', '20111', FHMMaintenance)}
 
 	'''
 
