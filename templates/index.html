@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="ScoreBot - CTF17">
+        <meta name="author" content="DMI - University Catania">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>ScoreBot - CTF17</title>
+
+        <!-- CSS -->
+        <!--
+        <link rel="stylesheet" href="../static/css/bulma.css">
+        <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+        -->
+        
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bulma.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+
+    </head>
+    <body>
+
+        
+        <section class="hero is-medium is-light is-bold is-fullheight">
+            <div class="hero-body">
+                <div class="container">
+                    
+                    <div class="tile is-ancestor">
+                    <div class="tile is-horizontal">
+                    
+                        {% for key, value in teams.iteritems() %}
+                        <div class="tile is-parent">
+                            <article class="tile is-child notification is-info">
+                                <h2 class="title is-2">{{ key }}</h2>
+                                <figure class="image is-4by3">
+                                    <img src="http://bulma.io/images/placeholders/640x480.png">
+                                    <!--
+                                    <img src="{{ url_for('static', filename='img/{{ value.pic }}') }}">
+                                    -->
+                                </figure>
+
+                                <p class="title">Attack point: {{ value.att_score }}</p>
+                                <p class="subtitle">Defense point: {{ value.def_score }}</p>
+                            </article>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+   
+
+    </body>
+</html>

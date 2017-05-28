@@ -2,10 +2,9 @@ import sys
 import time, threading
 import random, string
 
-from flask import Flask
-from flask import request
+from flask import Flask, request, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates', static_folder="static")
 
 # Start-import-Services
 sys.path.insert(0, './services/')
@@ -99,10 +98,13 @@ def routine():
 
 @app.route("/")
 def hello():
+	return render_template('index.html', teams=teams)	
+	'''
 	res = ""
 	for team_name, team in teams.iteritems():
 		res += "Name: {0}</br>Def Pnt: {1}</br>Att Pnt: {2}</br></br>".format(team_name, team.def_score, team.att_score)
 	return res
+	'''
 
 @app.route('/submit', methods=['POST'])
 def submitFlag():
@@ -121,10 +123,11 @@ def getFlagID():
 
 if __name__ == '__main__':
 
-	'''
-	teams = {'CuredPin': Team('CuredPin', "192.168.0.13"),
-			 'LiquidPad': Team('LiquidPad', "192.168.0.13")}
+	
+	teams = {'CuredPin': Team('CuredPin', "192.168.0.8"),
+			 'LiquidPad': Team('LiquidPad', "192.168.0.8")}
 
+	'''
 	services = {'tweety_bird': Service('tweety_bird', '20118', tweetybird),
 				'textfilestore': Service('textfilestore', '20093', textfilestore),
 				'nadmozg': Service('nadmozg', '20067', nadmozg),
@@ -134,13 +137,16 @@ if __name__ == '__main__':
 				'ropeman': Service('ropeman', '20129', ropeman),
 				'blackgold': Service('blackgold', '20066', blackgold),
 				'sharing': Service('sharing', '20065', sharing),
-				'hanoifones': Service('hanoifones', '20040', hanoifones)}
+				'hanoifones': Service('hanoifones', '20040', hanoifones),
+				'FHMMaintenance': Service('FHMMaintenance', '20111', FHMMaintenance)}
 
 	'''
 
-	teams = {'testTeam': Team('testTeam', "192.168.0.13")}
-
-	services = {'sharing': Service('sharing', '20065', sharing)}
+	'''
+	teams = {'testTeam': Team('testTeam', "192.168.0.8")}
+	'''
+	
+	services = {'textfilestore': Service('textfilestore', '20093', textfilestore)}
 
 	game = Game(teams, services)
 	routine()
