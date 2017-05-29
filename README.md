@@ -21,6 +21,18 @@ Using the ucsb icttf 2015 vm.
 | ropeman | 20129 | An interesting ropeman/hangman game binary program. Password-protected note storage service in C. | Flags are identified by the note name.The flags are the status field in a txt file for a registered user | bin | [@Tkd-Alex](https://github.com/Tkd-Alex) |
 | hacker_diary | 20130 | Keeps a private log of how your exploits work, with timestamps and hashes you can share, so you can prove you exploited something without sharing how | A flag_id is an entry id which corresponds to a detailed, prehashed description of an exploit. http: //<hostname>: <port>/entries/<flag_id> should yield an entry with the flag | Python/Django | [@GabMus](https://github.com/GabMus) |
 
+# Dependences
+```python
+...
+pwntools
+pwn
+lxml
+Flask
+requests
+pexpect
+parse
+```
+
 # scorebot_ctf
 This is a simple sketch of a scorebot for Attack-Defense CTF in python.
 It has been tested using two services (textfilestore, tweety_bird) from iCTF 2015.
