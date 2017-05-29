@@ -30,7 +30,7 @@ def get_flag(host, port, flag_id, token):
         return data.replace('\n','')
 
 def set_flag(host, port, flag):
-        print("flag set: " + flag)
+        #print("flag set: " + flag)
         
         password = genRndString()
         username = genRndString()

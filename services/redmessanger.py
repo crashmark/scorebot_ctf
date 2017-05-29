@@ -20,7 +20,7 @@ def get_flag(host, port, flag_id, token):
         return data
         
 def set_flag(host, port, flag):
-        print("flag set: " + flag)
+        #print("flag set: " + flag)
         flag_id = genFlagID()
         password = genPasswd()
         c = remote(host,port)

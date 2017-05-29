@@ -33,13 +33,24 @@ class Game:
 			for team_name, team in teams.iteritems():
 				tmp_flag = service.getFlag(team.host, team_name)
 				if tmp_flag == service.flags[team.name]:
-					print 'Defense point! +1 for %s - %s' % (team_name, service_name)
+					print '[+] Defense point! +1 for %s - %s' % (team_name, service_name)
 					team.updateDefScore()
 
 	def setFlags(self):
 		for service_name, service in services.iteritems():
 			for team_name, team in teams.iteritems():
 				service.setFlag(team.host, team_name)
+
+
+	def updateLog(self):
+		localtime = time.asctime( time.localtime(time.time()) )
+		out_file = open("log.txt","a")
+		text = "\n-------------------\nLocal time: " + str(localtime)
+		for team_name, team in teams.iteritems():
+			text += "\n-------------------\n" + team_name + "\nAttack point: " + str(team.att_score) + "\nDefense point: " + str(team.def_score)
+
+		out_file.write(text)
+		out_file.close()
 
 	def getFlagID(self, service_name, evil_team):
 		return self.services[service_name].args[evil_team].get('flag_id')
@@ -50,16 +61,17 @@ class Game:
 		dic_flags = self.services[service_name].flags
 		for user, user_flag in dic_flags.iteritems():
 			if flag == user_flag: #and user != teamx.name:
-				print 'Attack point! +2 for ' + team_name
+				print '[+] Attack point! +2 for ' + team_name
 				teamx.updateAttScore()
 				self.services[service_name].flags[user] = ""
 				return "Flag valid!"
 		return "Flag invalid!"
 
 class Team:
-	def __init__(self, name, host):
+	def __init__(self, name, host, pic):
 		self.name = name
 		self.host = host
+		self.pic = pic
 		self.att_score = 0
 		self.def_score = 0
 
@@ -84,17 +96,20 @@ class Service:
    	  flag = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(20))
    	  self.args[team_name] = self.module.set_flag(host, self.port, flag)
    	  self.flags[team_name] = flag
+   	  print '[-] Set flag to ' + self.name + " service for " + team_name + " team"
 
    def getFlag(self, host, team_name):
    	  flag_id = self.args[team_name]["flag_id"]
    	  token = self.args[team_name]["token"]
    	  flag = self.module.get_flag(host, self.port, flag_id, token)
-	  print 'Retrieved flag: %s' % (flag)
+	  #print 'Retrieved flag: %s' % (flag)
+	  print '[-] Retive flag to ' + self.name + " service for " + team_name + " team"
 	  return flag
 
 def routine():
 	game.setFlags()
 	game.getFlags()
+	game.updateLog()
 	threading.Timer(10, routine).start()
 
 @app.route("/")
@@ -124,31 +139,26 @@ def getFlagID():
 
 if __name__ == '__main__':
 
-	
-	teams = {'CuredPin': Team('CuredPin', "192.168.0.8"),
-			 'LiquidPad': Team('LiquidPad', "192.168.0.8")}
+	teams = {'CuredPin': Team('CuredPin', "192.168.1.101", "cat.jpg"),
+			 'LiquidPad': Team('LiquidPad', "192.168.1.101", "dog.jpg")}
 
-	'''
-	services = {'tweety_bird': Service('tweety_bird', '20118', tweetybird),
-				'textfilestore': Service('textfilestore', '20093', textfilestore),
-				'nadmozg': Service('nadmozg', '20067', nadmozg),
+	services = {'nadmozg': Service('nadmozg', '20067', nadmozg),
 				'piratemap': Service('piratemap', '20038', piratemap),
-				'FHMMaintenance': Service('FHMMaintenance', '20111', FHMMaintenance)
-				'redmessanger': Service('redmessanger', '20064', redmessanger),
+				'FHMMaintenance': Service('FHMMaintenance', '20111', FHMMaintenance),
 				'ropeman': Service('ropeman', '20129', ropeman),
 				'blackgold': Service('blackgold', '20066', blackgold),
 				'sharing': Service('sharing', '20065', sharing),
 				'hanoifones': Service('hanoifones', '20040', hanoifones),
 				'FHMMaintenance': Service('FHMMaintenance', '20111', FHMMaintenance), 
 				'hacker_diary': Service('hacker_diary', '20130', hacker_diary)}
-
-	'''
-
+	
 	'''
 	teams = {'testTeam': Team('testTeam', "192.168.0.8")}
 	'''
-	
-	services = {'textfilestore': Service('textfilestore', '20093', textfilestore)}
+	'''
+	Not working.
+	'redmessanger': Service('redmessanger', '20064', redmessanger),
+	'''
 
 	game = Game(teams, services)
 	routine()

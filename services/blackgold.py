@@ -15,7 +15,7 @@ def get_flag(host, port, flag_id, token):
         return data.replace("Recipe content: ","").replace(" ","").replace('\n',"")
         
 def set_flag(host, port, flag):
-        print("flag set: " + flag)
+        #print("flag set: " + flag)
         flag_id = genFlagID()
         password = genRndString()
         c = remote(host,port)

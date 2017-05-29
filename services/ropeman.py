@@ -21,7 +21,7 @@ def get_flag(host, port, flag_id, token):
         return data.replace("Your status: [","").replace("]","").replace('\n',"")
         
 def set_flag(host, port, flag):
-        print("flag set: " + flag)
+        #print("flag set: " + flag)
         username = genRndString()
         password = genRndString()
         c = remote(host,port)

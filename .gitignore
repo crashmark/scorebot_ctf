@@ -1,2 +1,3 @@
 /services/*.pyc
 *.pyc
+log.txt

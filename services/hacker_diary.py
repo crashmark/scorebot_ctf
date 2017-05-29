@@ -72,7 +72,7 @@ def set_flag(host, port, flag):
     token = loginres['token']
     entry = _entriesPost(server, token, flag)
     #flags[entry['hash']]=flag
-    print('*************** setted flag: '+flag)
+    #print('*************** setted flag: '+flag)
     return {'flag_id': entry['id'], 'token': token}
  
 def get_flag(host, port, flag_id, token):
