@@ -17,7 +17,7 @@ def get_flag(host, port, flag_id, token):
 
 def set_flag(host, port, flag):
     flag = "FLG_"+flag
-    flag_id = gen_flagID(flag)
+    flag_id = gen_flagID()
     token = gen_passwd()
     flag_url="username=%s&pass=%s&secret=%s" % (flag_id, token, flag)
     url="http://%s:%s/extern/register.html/registration" % (host, port)
@@ -29,6 +29,6 @@ def gen_passwd():
     password=''.join(random.choice(string.ascii_letters + string.digits) for _ in range(rang))
     return password
 
-def gen_flagID(flag):
+def gen_flagID():
     flag_id = randint(0, 9999999999)
     return flag_id
