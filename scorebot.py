@@ -19,6 +19,7 @@ import blackgold
 import sharing
 import hanoifones
 import FHMMaintenance
+import hacker_diary
 
 # End-import-Services
 
@@ -138,7 +139,7 @@ if __name__ == '__main__':
 				'blackgold': Service('blackgold', '20066', blackgold),
 				'sharing': Service('sharing', '20065', sharing),
 				'hanoifones': Service('hanoifones', '20040', hanoifones),
-				'FHMMaintenance': Service('FHMMaintenance', '20111', FHMMaintenance)}
+				'FHMMaintenance': Service('FHMMaintenance', '20111', FHMMaintenance), 'hacker_diary': Service('hacker_diary', '20130', hacker_diary)}
 
 	'''
 
