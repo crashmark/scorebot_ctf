@@ -79,8 +79,4 @@ def set_flag(host, port, flag):
 def genRndString():
         rang = randint(8,16)
         rndString = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(rang))
-        return rndString 
-
-def genFlagID():
-        flag_id = randint(0,999999999)
-        return str(flag_id)
+        return rndString

@@ -3,7 +3,9 @@ import sys
 import pexpect
 import pexpect.fdpexpect
 import re
-
+import random
+from random import randint
+import string
 class Service:
     def __init__(self, ip, port):
         if ip:
@@ -60,7 +62,9 @@ def get_flag(ip, port, flag_id, token):
 def set_flag(ip, port, flag):
     service = Service(ip, port)
     c = service.get()
-
+    
+    flag_id = genFlagID()
+    password = genRndString()
     c.expect('\?:')
     c.sendline('1')
     c.expect('Insert the IMEI of the \(hano\)iFon:')
@@ -75,3 +79,12 @@ def set_flag(ip, port, flag):
     service.close()
 
     return {"flag_id": flag_id, "token": password}
+
+def genRndString():
+        rang = randint(8,16)
+        rndString = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(rang))
+        return rndString 
+
+def genFlagID():
+        flag_id = randint(0,999999999)
+        return str(flag_id)

@@ -23,7 +23,7 @@ import time
 import hashlib
 import string
  
-from random import randint, choice
+from random import choice
  
 token=None
 flags=dict()
