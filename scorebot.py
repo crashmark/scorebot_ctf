@@ -9,8 +9,6 @@ app = Flask(__name__, template_folder='templates', static_folder="static")
 # Start-import-Services
 sys.path.insert(0, './services/')
 
-import textfilestore
-import tweetybird
 import nadmozg
 import piratemap
 import redmessanger
@@ -144,6 +142,7 @@ if __name__ == '__main__':
 
 	services = {'nadmozg': Service('nadmozg', '20067', nadmozg),
 				'piratemap': Service('piratemap', '20038', piratemap),
+				'redmessanger': Service('redmessanger', '20064', redmessanger),
 				'FHMMaintenance': Service('FHMMaintenance', '20111', FHMMaintenance),
 				'ropeman': Service('ropeman', '20129', ropeman),
 				'blackgold': Service('blackgold', '20066', blackgold),
@@ -155,10 +154,7 @@ if __name__ == '__main__':
 	'''
 	teams = {'testTeam': Team('testTeam', "192.168.0.8")}
 	'''
-	'''
-	Not working.
-	'redmessanger': Service('redmessanger', '20064', redmessanger),
-	'''
+	
 
 	game = Game(teams, services)
 	routine()
