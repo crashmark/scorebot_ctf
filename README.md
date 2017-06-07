@@ -2,8 +2,6 @@
 
 Using the ucsb icttf 2015 vm.
 
-[Services Spreadsheet](https://docs.google.com/spreadsheets/d/1neJixO6zLH3hMt0TSZnZKl6QOM6abev77Lt18J0X3dU/edit?usp=sharing)
-
 [iCTF 2015 VM Download](https://ictf.cs.ucsb.edu/archive/2015/vms/ictf2015.services.tpxz)
 
 ### Service avaiable in this repo
